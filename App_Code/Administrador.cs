@@ -15,12 +15,13 @@ public static class Administrador
     {
         get
         {
+            
             return _isAdmin;
         }
 
         set
         {
-            _isAdmin = value;
+            _isAdmin = value; 
         }
     }
 

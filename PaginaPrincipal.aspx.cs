@@ -6,10 +6,22 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 
 public partial class PaginaPrincipal : System.Web.UI.Page
-{
+{ 
+
     protected void Page_Load(object sender, EventArgs e)
     {
-        lblUserLogged.Text = Session["idUsuario"].ToString(); 
+        lblUserLogged.Text = Session["idUsuario"].ToString();
+    }
+
+    public void insertCursosValues(DropDownList dropdown)
+    {
+        dropdown.Items.Clear();
+        int cont = 0;
+        foreach (string i in Cursos.ListaCursos)
+        {
+            dropdown.Items.Insert(cont, i);
+            cont++;
+        }
     }
 
     protected void btnGuardarMateria_Click(object sender, EventArgs e)
@@ -17,17 +29,6 @@ public partial class PaginaPrincipal : System.Web.UI.Page
         Cursos.insertNuevoCurso(txtMateria.Text);
         insertCursosValues(drpEscogeMateria);
         txtMateria.Text = ""; 
-    }
-
-    public  void insertCursosValues(DropDownList dropdown)
-    {
-        dropdown.Items.Clear(); 
-        int cont = 0;
-        foreach (string i in Cursos.ListaCursos)
-        {
-            dropdown.Items.Insert(cont, i);
-            cont++;
-        }
     }
 
     protected void btnEscogerMateria_Click(object sender, EventArgs e)
