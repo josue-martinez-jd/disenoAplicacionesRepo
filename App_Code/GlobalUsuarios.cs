@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,11 +9,9 @@ using System.Web;
 /// </summary>
 public static class GlobalUsuarios
 {
-    static string[] _users = new string[] { "", "", "", "", "", "", "", "", "", "" };
-    static string[] _passwords = new string[] { "", "", "", "", "", "", "", "", "", "" };
+    static ArrayList _users = new ArrayList();
 
-
-    public static string[] GlobalUsers
+    public static ArrayList GlobalUsers
     {
         get
         {
@@ -23,16 +22,27 @@ public static class GlobalUsuarios
             _users = value;
         }
     }
-
-    public static string[] GlobalPasswords
+    /**
+     * The user and password are set on the same arraylist, 
+     * then they are separated in next two methods 
+     * **/
+    public static string setUsuarios(string usuario, string password)
     {
-        get
-        {
-            return _passwords;
-        }
-        set
-        {
-            _passwords = value;
-        }
+        return usuario + ":" + password;
+    }
+
+
+    /**
+     * The next two methods are done here, 
+     * just so the only thing called it's the 
+     * object 
+     * **/
+    public static string Usuario (string usuario) { 
+     return usuario.Split(':')[0];
+    }
+
+    public static string Password(string usuario)
+    {
+        return usuario.Split(':')[1];
     }
 }

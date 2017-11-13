@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 
 public partial class AdminPrincipal : System.Web.UI.Page
 {
+
     protected void Page_Load(object sender, EventArgs e)
     {
 
@@ -17,7 +18,7 @@ public partial class AdminPrincipal : System.Web.UI.Page
         dropdown.Items.Clear();
         int cont = 0;
         foreach (string i in Matricula.Matriculas)
-        {
+        { 
             string[] estudiantes = i.Split(' ');
             dropdown.Items.Insert(cont, estudiantes[0]);
             cont++;

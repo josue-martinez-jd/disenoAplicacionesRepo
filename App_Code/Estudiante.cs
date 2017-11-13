@@ -66,11 +66,12 @@ public static class Estudiante
         }
     }
 
-    public static void guardarNuevoEstudiante(string nombres,string apellidos, string correos)
+    public static void guardarNuevoEstudiante(string usuario, string nombres, string apellidos, string correos)
     {
+        EstudianteLoggeado = usuario;
         Nombres.Add(EstudianteLoggeado + ":" + nombres);
         Apellidos.Add(EstudianteLoggeado + ":" + apellidos);
-        Correos.Add(EstudianteLoggeado + ":" + correos); 
+        Correos.Add(EstudianteLoggeado + ":" + correos);
     }
 
     public static string returnInfoEstudiante(ArrayList arraylist)

@@ -6,15 +6,15 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 
 public partial class index : System.Web.UI.Page
-{
+{ 
+
     protected void Page_Load(object sender, EventArgs e)
     {
         pnlRegister.Visible = false;
     }
 
     protected void btnIngresar_Click(object sender, EventArgs e)
-    {
-
+    { 
         if (txtUser.Text == null || txtUser.Text == "" ||
             txtPass.Text == null || txtPass.Text == "")
         {
@@ -22,20 +22,25 @@ public partial class index : System.Web.UI.Page
         }
         else
         {
-            for (int i = 0; i < GlobalUsuarios.GlobalPasswords.Length; i++)
+            /**
+             Changed all this method of checking the 
+            Users and Password because previously it
+            wasn't working as expected
+             */
+            foreach(string i in GlobalUsuarios.GlobalUsers)
             {
-                if (GlobalUsuarios.GlobalPasswords[i] == txtPass.Text && GlobalUsuarios.GlobalUsers[i] == txtUser.Text)
+                if (i.Contains(txtUser.Text) && GlobalUsuarios.Password(i) == txtPass.Text)
                 {
-                    Session["idUsuario"] = GlobalUsuarios.GlobalUsers[i];
-                    Session["idPassword"] = GlobalUsuarios.GlobalPasswords[i]; 
-                    if(Administrador.IsAdmin == false)
+                    Session["idUsuario"] = GlobalUsuarios.Usuario(i);
+                    Session["idPassword"] = GlobalUsuarios.Password(i); 
+                    if (Administrador.IsAdmin == false)
                     {
                         Response.Redirect("PaginaPrincipal.aspx");
-                        
-                    }else
+                    }
+                    else
                     {
-                        Response.Redirect("AdminPrincipal.aspx"); 
-                    } 
+                        Response.Redirect("AdminPrincipal.aspx");
+                    }
                 }
             }
         }
@@ -43,13 +48,13 @@ public partial class index : System.Web.UI.Page
 
     protected void btnRegistrar_Click(object sender, EventArgs e)
     {
-        GlobalUsuarios.GlobalUsers.SetValue(txtUsuario.Text, GlobalUsuarios.GlobalUsers.Length - 1);
-        GlobalUsuarios.GlobalPasswords.SetValue(txtPassReg.Text, GlobalUsuarios.GlobalUsers.Length - 1);
-        if(Administrador.IsAdmin == false)
-        {
-            Estudiante.EstudianteLoggeado = txtUsuario.Text;
-            Estudiante.guardarNuevoEstudiante(txtNombre.Text,txtApellidos.Text, txtCorreo.Text); 
+        GlobalUsuarios.GlobalUsers.Add(GlobalUsuarios.setUsuarios(txtUsuario.Text,txtPassReg.Text)); 
+        if (Administrador.IsAdmin == false) 
+        { 
+            //Estudiante.EstudianteLoggeado = txtUsuario.Text; // We dont need this method as the next method works for that 
+            Estudiante.guardarNuevoEstudiante(txtUsuario.Text, txtNombre.Text, txtApellidos.Text, txtCorreo.Text);
         }
+        lblIngresar.Text = Administrador.IsAdmin.ToString();
         cleanFills();
     }
 
@@ -67,8 +72,6 @@ public partial class index : System.Web.UI.Page
         pnlRegister.Visible = true;
     }
 
-
-
     protected void btnCalculadora_Click(object sender, EventArgs e)
     {
         Response.Redirect("calculator.aspx");
@@ -76,6 +79,6 @@ public partial class index : System.Web.UI.Page
 
     protected void chkAdmin_CheckedChanged(object sender, EventArgs e)
     {
-        Administrador.IsAdmin = true; 
+        Administrador.IsAdmin=true;
     }
 }

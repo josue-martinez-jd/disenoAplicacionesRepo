@@ -50,7 +50,7 @@ public static class Matricula
     public static string returnEstudianteSeleccionado(string estudiante)
     {
         string matricula = null; 
-        foreach (string i in Matricula.Matriculas)
+        foreach (string i in Matriculas)
         {
             if (i.Contains(estudiante))
             {
