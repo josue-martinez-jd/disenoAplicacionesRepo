@@ -35,7 +35,7 @@ public partial class index : System.Web.UI.Page
                     Session["idPassword"] = GlobalUsuarios.Password(i); 
                     if (Administrador.IsAdmin == false)
                     {
-                        Response.Redirect("PaginaPrincipal.aspx");
+                        Response.Redirect("financiera.aspx");
                     }
                     else
                     {

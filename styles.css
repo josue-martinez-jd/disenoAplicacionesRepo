@@ -1,0 +1,15 @@
+﻿body {
+    background-image: url("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/UhGJuGw/global-business-finance-background_n_-4qfeng__F0000.png"); 
+}
+
+th {
+    width:100px; 
+}
+
+td { 
+    width:110px; 
+}
+
+td input {
+    max-width:80px; 
+}
